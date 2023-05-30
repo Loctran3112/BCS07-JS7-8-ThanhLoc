@@ -87,31 +87,64 @@ function tangGiaTri() {
 }
 document.getElementById("sapXep").onclick = tangGiaTri;
 // b8: tìm số nguyên đầu tiên trong mảng. nếu mảng không có số nguyên tố thì trả về -1
+
 function timSoNguyen() {
-    var soNguyen = 0;
-    arrNumber.forEach(function (item, index) {
-        if (item > 0) {
-            soNguyen += item;
+    function soNguyenDau(x) {
+        if (x < 2) {
+            return -1;
         }
-    });
+        for (var i = 2; i <= Math.sqrt(x); i++) {
+            if (x % i == 0) {
+                return -1;
+            }
+        }
+        return x;
+    }
+    var soNguyen = -1;
+    for (var i = 0; i < addNumber.length; i++) {
+        var countNumber = soNguyenDau(addNumber[i]);
+        if (countNumber != -1) {
+            soNguyen = countNumber;
+            break;
+        }
+    }
+
     document.getElementById("soNguyenDauTien").innerHTML = soNguyen;
 }
 document.getElementById("soNguyen").onclick = timSoNguyen;
+
 // b9: nhập thêm 1 mảng số thực, tìm xem trong mảng có bao nhiêu số nguyên?
 var arrTwo = [];
 function themMoi() {
     var numberSecond = document.getElementById("addNumber").value * 1;
     arrTwo.push(numberSecond);
     document.getElementById("addNumber").innerHTML = "";
-    document.getElementById("demSoNguyen").innerHTML = arrTwo;
-    function isInt(value) {
-        return !isNaN(value) &&
-            parseInt(Number(value)) == value &&
-            !isNaN(parseInt(value, 10));
-    }
+    document.getElementById("themSoNguyen").innerHTML = arrTwo;
 
-    // tao bien countNaturalNumber
-    // dueyt mang neu isnan la true tyhi  tang so dem
 }
-document.getElementById("demSo").onclick = themMoi;
+document.getElementById("themSo").onclick = themMoi;
+function kquaSoNguyen() {
+    var num = 0;
+    if (arrTwo.length > 0) {
+        num = arrTwo.filter(num => num > 0 && num % 2 !== 0);
+    }
+    document.getElementById("demSoNguyen").innerHTML = num.length;
+}
+document.getElementById("demSo").onclick = kquaSoNguyen;
 // b10: so sánh số lượng số dương và số lượng số âm xem số nào nhiều hơn.
+function soSanh() {
+    var soSanh = 0;
+    if (arrNumber.length > 0) {
+        soSanh = arrNumber.filter(soSanh => soSanh > 0);
+    } else if (arrNumber.length < 0) {
+        soSanh = arrNumber.filter(soSanh => soSanh < 0);
+    }
+    document.getElementById("soSanhAmDuong").innerHTML = soSanh.length;
+
+    // arrNumber.forEach(function (item, index) {
+    //     if (item > addNumber.length[0]) {
+    //         soSanh = item;
+    //     }
+    // });
+}
+document.getElementById("soSanh").onclick = soSanh;
