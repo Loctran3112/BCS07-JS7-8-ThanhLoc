@@ -133,18 +133,39 @@ function kquaSoNguyen() {
 document.getElementById("demSo").onclick = kquaSoNguyen;
 // b10: so sánh số lượng số dương và số lượng số âm xem số nào nhiều hơn.
 function soSanh() {
-    var soSanh = 0;
-    if (arrNumber.length > 0) {
-        soSanh = arrNumber.filter(soSanh => soSanh > 0);
-    } else if (arrNumber.length < 0) {
-        soSanh = arrNumber.filter(soSanh => soSanh < 0);
-    }
-    document.getElementById("soSanhAmDuong").innerHTML = soSanh.length;
+    // var ktsoDuong = 0;
+    // if (arrNumber.length > 0) {
+    //     ktsoDuong = arrNumber.filter(ktsoDuong => ktsoDuong > 0);
+    //     bienDuong = +1;
+    //     ktsoAm = arrNumber.filter(ktsoAm => ktsoAm < 0);
+    //     bienAm = + 1;
+    // }
+    // var bienDuong = 0;
+    // var bienAm = 0;
+    // for (var i = 0; i > arrNumber.length; i++) {
+    //     if (arrNumber[i] > 0) {
+    //         bienDuong++;
+    //     } else {
+    //         bienAm++;
+    //     };
+    // };
+    var bienDuong = 0;
+    arrNumber.forEach(function (item) {
+        if (item > 0) {
+            bienDuong++;
+        }
+    });
 
-    // arrNumber.forEach(function (item, index) {
-    //     if (item > addNumber.length[0]) {
-    //         soSanh = item;
-    //     }
-    // });
+    var bienAm = 0;
+    arrNumber.forEach(function (item) {
+        if (item < 0) {
+            bienAm++;
+        }
+    });
+    if (bienDuong > bienAm) {
+        document.getElementById("soSanhAmDuong").innerHTML = "Dương lớn hơn Âm";
+    } else {
+        document.getElementById("soSanhAmDuong").innerHTML = "Dương bé hơn Âm";
+    }
 }
 document.getElementById("soSanh").onclick = soSanh;
